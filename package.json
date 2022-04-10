@@ -1,0 +1,17 @@
+{
+  "name": "@ice/root",
+  "private": true,
+  "scripts": {
+    "dev": "lerna run --scope @ice/* --parallel dev",
+    "build": "lerna run --scope @ice/* --parallel build",
+    "serve": "lerna run --scope @ice/* --parallel serve",
+    "clean": "lerna run --scope @ice/* --parallel clean",
+    "lint": "lerna run --scope @ice/root-app lint"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
