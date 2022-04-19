@@ -5,7 +5,7 @@ import Devices from "../../../assets/bg.svg";
 const Landing = () => {
   const location = useLocation();
   return (
-    <div className="h-screen bg-right bg-cover  bg-dark-main">
+    <div className="h-screen bg-right bg-cover bg-dark-main">
       <div className="container w-full p-6 mx-auto">
         <div className="flex items-center justify-between w-full">
           <a
