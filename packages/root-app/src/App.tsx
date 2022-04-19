@@ -26,9 +26,9 @@ const App: React.FC = () => {
             element={<h1 className="text-white bg-red-400">Wheel</h1>}
           />
           {/* <Route path="game/*" element={<Game />} /> */}
-          <Route path="/app" element={<Navigate replace to="wheel" />} />
+          {/* <Route path="/app" element={<Navigate replace to="wheel" />} /> */}
         </Route>
-        <Route path="/" element={<Navigate replace to="/app/wheel" />} />
+        <Route path="/" element={<Navigate replace to="/app" />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </React.Suspense>

@@ -1,31 +1,71 @@
-import { useRemoteStore } from "@store/useRemoteStore";
-import React from "react";
-import { Outlet, useLocation } from "react-router-dom";
-import Profile from "./components/Profile";
+import React, { useState } from "react";
+import {
+  AppShell,
+  Navbar,
+  Header,
+  Footer,
+  Aside,
+  Text,
+  MediaQuery,
+  Burger,
+  useMantineTheme,
+} from "@mantine/core";
 
-const Home: React.FC = () => {
-  const location = useLocation();
-
-  const { sidebarStatus } = useRemoteStore();
-
+const Home = () => {
+  const theme = useMantineTheme();
+  const [opened, setOpened] = useState(false);
   return (
-    <div className="bg-dark-main">
-      <div className="flex justify-center h-full ">
-        {sidebarStatus ? (
-          <div className="fixed top-0 left-0 flex-col hidden w-1/6 h-full pt-16 xl:flex bg-dark-main"></div>
-        ) : null}
+    <AppShell
+      className={`${
+        theme.colorScheme === "dark" ? "bg-dark-main" : "bg-white"
+      }`}
+      navbarOffsetBreakpoint="sm"
+      asideOffsetBreakpoint="sm"
+      fixed
+      navbar={
+        <Navbar
+          p="md"
+          hiddenBreakpoint="sm"
+          hidden={!opened}
+          width={{ sm: 200, lg: 300 }}
+        >
+          <Text>Application navbar</Text>
+        </Navbar>
+      }
+      aside={
+        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
+          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
+            <Text>Application sidebar</Text>
+          </Aside>
+        </MediaQuery>
+      }
+      footer={
+        <Footer height={60} p="md">
+          Application footer
+        </Footer>
+      }
+      header={
+        <Header height={70} p="md">
+          <div
+            style={{ display: "flex", alignItems: "center", height: "100%" }}
+          >
+            <MediaQuery largerThan="sm" styles={{ display: "none" }}>
+              <Burger
+                opened={opened}
+                onClick={() => setOpened((o) => !o)}
+                size="md"
+                color={theme.colors.gray[6]}
+                mr="xl"
+              />
+            </MediaQuery>
 
-        <div className="w-full h-screen pt-32 xl:w-4/6 lg:pt-16">
-          <Outlet />
-        </div>
-        {sidebarStatus ? (
-          <div className="fixed top-0 right-0 hidden w-1/6 h-full px-4 pt-16 xl:block bg-dark-main">
-            <Profile />
+            <Text>Application header</Text>
           </div>
-        ) : null}
-      </div>
-    </div>
+        </Header>
+      }
+    >
+      <Text>Resize app to see responsive navbar in action</Text>
+    </AppShell>
   );
 };
-
 export default Home;
