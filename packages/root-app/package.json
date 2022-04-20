@@ -22,6 +22,7 @@
     "dayjs": "^1.11.1",
     "dts-loader": "^0.1.6",
     "express": "^4.17.2",
+    "framer-motion": "^6.3.0",
     "history": "^5.0.0",
     "immer": "^9.0.7",
     "jest": "^27.4.7",
