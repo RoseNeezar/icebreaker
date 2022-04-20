@@ -1,15 +1,16 @@
-import React, { useState } from "react";
 import {
   AppShell,
-  Navbar,
-  Header,
-  Footer,
   Aside,
-  Text,
-  MediaQuery,
   Burger,
+  Footer,
+  Header,
+  MediaQuery,
+  Navbar,
+  Text,
   useMantineTheme,
 } from "@mantine/core";
+import { motion } from "framer-motion";
+import React, { useState } from "react";
 
 const Home = () => {
   const theme = useMantineTheme();
@@ -29,6 +30,15 @@ const Home = () => {
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
         >
+          <motion.button
+            className="p-3 mb-2 bg-red-500 rounded-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+          >
+            Hello
+          </motion.button>
+
           <Text>Application navbar</Text>
         </Navbar>
       }
