@@ -25,7 +25,7 @@ const Home = () => {
       fixed
       navbar={
         <Navbar
-          p="md"
+          p="sm"
           hiddenBreakpoint="sm"
           hidden={!opened}
           width={{ sm: 200, lg: 300 }}
@@ -35,6 +35,7 @@ const Home = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8 }}
+            whileHover={{ scale: 1.1 }}
           >
             Hello
           </motion.button>
@@ -42,20 +43,8 @@ const Home = () => {
           <Text>Application navbar</Text>
         </Navbar>
       }
-      aside={
-        <MediaQuery smallerThan="sm" styles={{ display: "none" }}>
-          <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-            <Text>Application sidebar</Text>
-          </Aside>
-        </MediaQuery>
-      }
-      footer={
-        <Footer height={60} p="md">
-          Application footer
-        </Footer>
-      }
       header={
-        <Header height={70} p="md">
+        <Header height={55} p="md">
           <div
             style={{ display: "flex", alignItems: "center", height: "100%" }}
           >
