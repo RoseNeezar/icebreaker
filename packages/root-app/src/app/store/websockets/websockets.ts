@@ -6,7 +6,7 @@ const useSocket = () => {
   const { setSocket } = useSocketStore();
   useEffect(() => {
     const socket = io("http://localhost:3030", {
-      path: "/kanban/socket.io",
+      path: "/ice/socket.io",
     });
 
     setSocket(socket);
