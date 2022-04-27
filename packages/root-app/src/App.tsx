@@ -1,10 +1,10 @@
-import Home from "@pages/Home/Home.page";
 import Landing from "@pages/Landing/Landing.page";
 import NotFound from "@pages/NotFound/NotFound";
+import { AnimatePresence } from "framer-motion";
 import React, { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-// const Wheel = React.lazy(() => import("./app/remote/Wheel.remote"));
+const Home = React.lazy(() => import("./app/pages/Home/Home.page"));
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -18,19 +18,24 @@ const App: React.FC = () => {
 
   return (
     <React.Suspense fallback={<h1>Loading...</h1>}>
-      <Routes location={state?.backgroundLocation || location}>
-        <Route path="/landing" element={<Landing />} />
-        <Route path="app" element={<Home />}>
-          <Route
-            path="wheel/*"
-            element={<h1 className="text-white bg-red-400">Wheel</h1>}
-          />
-          {/* <Route path="game/*" element={<Game />} /> */}
-          {/* <Route path="/app" element={<Navigate replace to="wheel" />} /> */}
-        </Route>
-        <Route path="/" element={<Navigate replace to="/app" />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <AnimatePresence exitBeforeEnter>
+        <Routes
+          location={state?.backgroundLocation || location}
+          key={location.pathname}
+        >
+          <Route path="/landing" element={<Landing />} />
+          <Route path="app" element={<Home />}>
+            <Route
+              path="wheel/*"
+              element={<h1 className="text-white bg-red-400">Wheel</h1>}
+            />
+            {/* <Route path="game/*" element={<Game />} /> */}
+            {/* <Route path="/app" element={<Navigate replace to="wheel" />} /> */}
+          </Route>
+          <Route path="/" element={<Navigate replace to="/app" />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </AnimatePresence>
     </React.Suspense>
   );
 };
