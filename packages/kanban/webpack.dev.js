@@ -3,30 +3,36 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 const commonConfig = require("./webpack.common");
 const deps = require("./package.json").dependencies;
 const { SourceMapDevToolPlugin } = require("webpack");
-const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
+const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 const devConfig = {
   entry: "./src/index.ts",
   mode: "development",
-  output: {
-    publicPath: "/",
-    clean: true,
-  },
   devServer: {
-    port: 3000,
+    port: 3001,
     historyApiFallback: true,
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
   },
+  //to dev in host app for hot reload
+  // this shit works but only has live reload
+  // output: {
+  //   publicPath: "http://localhost:3002/",
+  //   clean: true,
+  // },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"],
   },
+  // optimization: {
+  //   runtimeChunk: "single",
+  // },
   plugins: [
     new ModuleFederationPlugin({
-      name: "root-app",
-      remotes: {
-        wheel: "wheel@[wheelUrl]/remoteEntry.js",
+      name: "wheel",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./Wheel": "./src/bootstrap",
       },
       shared: {
         ...deps,
@@ -38,7 +44,9 @@ const devConfig = {
         },
       },
     }),
-    new ExternalTemplateRemotesPlugin(),
+    new ReactRefreshWebpackPlugin({
+      exclude: [/node_modules/, /bootstrap\.tsx$/],
+    }),
     new SourceMapDevToolPlugin({
       filename: "[file].map",
     }),

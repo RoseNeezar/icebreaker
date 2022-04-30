@@ -2,31 +2,22 @@ const { merge } = require("webpack-merge");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 const commonConfig = require("./webpack.common");
 const deps = require("./package.json").dependencies;
-const { SourceMapDevToolPlugin } = require("webpack");
-const ExternalTemplateRemotesPlugin = require("external-remotes-plugin");
 
-const devConfig = {
+const prodConfig = {
   entry: "./src/index.ts",
-  mode: "development",
+  mode: "production",
   output: {
-    publicPath: "/",
-    clean: true,
-  },
-  devServer: {
-    port: 3000,
-    historyApiFallback: true,
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
+    filename: "[name].[contenthash].js",
+    // publicPath: '/root-app/latest/'
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    extensions: [".ts", ".tsx", ".js"],
   },
   plugins: [
     new ModuleFederationPlugin({
       name: "root-app",
       remotes: {
-        wheel: "wheel@[wheelUrl]/remoteEntry.js",
+        todo: `todo@https://optimistic-curie-93c51c.netlify.app/remoteEntry.js`,
       },
       shared: {
         ...deps,
@@ -38,11 +29,7 @@ const devConfig = {
         },
       },
     }),
-    new ExternalTemplateRemotesPlugin(),
-    new SourceMapDevToolPlugin({
-      filename: "[file].map",
-    }),
   ],
 };
 
-module.exports = merge(commonConfig, devConfig);
+module.exports = merge(commonConfig, prodConfig);

@@ -2,7 +2,7 @@ import { useRemoteStore } from "@store/useRemoteStore";
 import { useMount } from "wheel/Wheel";
 import * as React from "react";
 
-const Kanban = () => {
+const Wheel = () => {
   const ref = React.useRef<any>(null);
   // console.log('exp')
   React.useEffect(() => {
@@ -14,4 +14,4 @@ const Kanban = () => {
   return <div ref={ref} />;
 };
 
-export default Kanban;
+export default Wheel;

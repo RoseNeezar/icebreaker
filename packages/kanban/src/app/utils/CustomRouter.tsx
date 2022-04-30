@@ -1,0 +1,26 @@
+import { useState, useLayoutEffect, FC } from "react";
+import { RouteProps, Router } from "react-router-dom";
+import { History } from "history";
+
+interface ICustomRouter extends RouteProps {
+  history: History;
+}
+const CustomRouter: FC<ICustomRouter> = ({ history, ...props }) => {
+  const [state, setState] = useState({
+    action: history.action,
+    location: history.location,
+  });
+
+  useLayoutEffect(() => history.listen(setState), [history]);
+
+  return (
+    <Router
+      {...props}
+      location={state.location}
+      navigationType={state.action}
+      navigator={history}
+    />
+  );
+};
+
+export default CustomRouter;
