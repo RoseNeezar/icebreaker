@@ -13,7 +13,8 @@ const Home = () => {
   });
 
   return (
-    <div tw="bg-green-600 flex flex-col items-center  w-full overflow-hidden ">
+    <div tw="bg-green-600 flex flex-col items-center  w-full overflow-hidden">
+      <div tw="bg-purple-800 p-3 rounded-lg mt-3">App name</div>
       Wheel
     </div>
   );
