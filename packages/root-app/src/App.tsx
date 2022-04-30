@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 const Home = React.lazy(() => import("./app/pages/Home/Home.page"));
+const Wheel = React.lazy(() => import("./app/remote/Wheel.remote"));
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -25,10 +26,7 @@ const App: React.FC = () => {
         >
           <Route path="/landing" element={<Landing />} />
           <Route path="app" element={<Home />}>
-            <Route
-              path="wheel/*"
-              element={<h1 className="text-white bg-red-400">Wheel</h1>}
-            />
+            <Route path="wheel/*" element={<Wheel />} />
             {/* <Route path="game/*" element={<Game />} /> */}
             <Route path="/app" element={<Navigate replace to="wheel" />} />
           </Route>
