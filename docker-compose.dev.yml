@@ -2,6 +2,6 @@ version: "3.5"
 services:
   redis:
     image: "redis:6.2-alpine"
-    command: --port 6369
+    command: --port 6379
     ports:
-      - 6369:6369
+      - 6379:6379
