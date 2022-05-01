@@ -3,7 +3,7 @@ import useSocket from "@store/websockets/websockets";
 import React from "react";
 
 const Home = () => {
-  useSocket("who");
+  useSocket();
   const {
     onChangeText,
     resetText,
